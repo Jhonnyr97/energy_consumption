@@ -1,0 +1,2 @@
+json.monthly_peak_consumption @monthly_peak_consumption
+json.monthly_total_consumption @monthly_total_consumption
