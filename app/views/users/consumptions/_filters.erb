@@ -1,0 +1,21 @@
+<%= search_form_for @q, data: { controller: "filter-form" } do |f| %>
+  <div class="my-5">
+    <%= f.label :energy_type_eq, "Energy Type" %>
+    <%= f.select :energy_type_eq, @energy_options, {}, class: "block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", data: { action: "change->filter-form#submit" } %>
+  </div>
+
+  <div class="my-5">
+    <%= f.label :measured_at_gteq, "Measured At (Start Date)" %>
+    <%= f.date_field :measured_at_gteq, class: "block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", data: { action: "change->filter-form#submit" } %>
+  </div>
+
+  <div class="my-5">
+    <%= f.label :measured_at_lteq, "Measured At (End Date)" %>
+    <%= f.date_field :measured_at_lteq, class: "block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", data: { action: "change->filter-form#submit" } %>
+  </div>
+
+  <div class="inline-flex space-x-2">
+    <%= f.submit "Filter", class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+    <%= link_to "Clear Filter", consumptions_path, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-gray-200 hover:bg-gray-300 text-gray-800 inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

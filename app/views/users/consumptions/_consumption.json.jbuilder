@@ -1,0 +1,1 @@
+json.extract! consumption, :id, :energy_type, :value, :unit, :measured_at, :user_id

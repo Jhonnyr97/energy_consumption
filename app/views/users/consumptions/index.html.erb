@@ -1,0 +1,43 @@
+<% content_for :title, "Consumptions" %>
+
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <%= render "filters" %>
+
+  <div class="my-5 p-4 rounded-md">
+    <p class="font-bold text-lg">Total Consumption: <%= @total_consumption %> <%= @unit %></p>
+    <p class="font-bold text-lg">Average Daily Consumption: <%= "%.2f" % @average_daily_consumption %> <%= @unit %></p>
+    <% if @monthly_peak_consumption.any? %>
+      <p class="font-bold text-lg">Monthly Peak Consumption:</p>
+      <ul class="list-disc list-inside ml-4">
+        <% @monthly_peak_consumption.each do |month, peak_value| %>
+          <li><%= month %>: <%= peak_value %> <%= @unit %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <% if @monthly_total_consumption.any? %>
+      <p class="font-bold text-lg">Monthly Total Consumption:</p>
+      <ul class="list-disc list-inside ml-4">
+        <% @monthly_total_consumption.each do |month, total_value| %>
+          <li><%= month %>: <%= total_value %> <%= @unit %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+
+  <div data-controller="consumption-chart">
+    <canvas data-consumption-chart-target="chartOutput"></canvas>
+  </div>
+
+  <div class="flex justify-between items-center mt-10">
+    <h1 class="font-bold text-4xl">Consumptions</h1>
+    <%= link_to "New consumption", new_consumption_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
+  </div>
+
+  <div id="consumptions" class="min-w-full divide-y divide-gray-200 space-y-5">
+    <%= render @consumptions %>
+  </div>
+</div>

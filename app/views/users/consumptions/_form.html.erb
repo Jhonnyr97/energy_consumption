@@ -1,0 +1,37 @@
+<%= form_with(model: consumption, class: "contents") do |form| %>
+  <% if consumption.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(consumption.errors.count, "error") %> prohibited this consumption from being saved:</h2>
+
+      <ul class="list-disc ml-6">
+        <% consumption.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :energy_type %>
+    <%= form.select :energy_type, Consumption.energy_types.keys.map { |type| [type.humanize, type] }, {}, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": consumption.errors[:energy_type].none?, "border-red-400 focus:outline-red-600": consumption.errors[:energy_type].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :value %>
+    <%= form.text_field :value, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": consumption.errors[:value].none?, "border-red-400 focus:outline-red-600": consumption.errors[:value].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :unit %>
+    <%= form.text_field :unit, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": consumption.errors[:unit].none?, "border-red-400 focus:outline-red-600": consumption.errors[:unit].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :measured_at %>
+    <%= form.date_field :measured_at, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": consumption.errors[:measured_at].none?, "border-red-400 focus:outline-red-600": consumption.errors[:measured_at].any?}] %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>
